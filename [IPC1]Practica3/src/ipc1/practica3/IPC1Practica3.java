@@ -8,8 +8,6 @@ package ipc1.practica3;
 import UI_Layout.UI_Area;
 import java.util.Scanner;
 import java.io.*;
-import javax.swing.JTextArea;
-
 /**
  *
  * @author 201612174
@@ -48,7 +46,7 @@ public class IPC1Practica3 {
             System.out.println("Unexpected I/O error occured.");
         }
         
-        UI_Area temp = new UI_Area();
+        UI_Area temp = new UI_Area(att);
         temp.setVisible(true);
         //Verificacion que el String esta initializado.
         for (int i = 0; i < att.length; i++) {

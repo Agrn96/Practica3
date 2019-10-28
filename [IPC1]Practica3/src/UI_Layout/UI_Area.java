@@ -13,11 +13,12 @@ import java.io.PrintStream;
  * @author 201612174 <Alberto Gabriel Reyes Ning>
  */
 public class UI_Area extends javax.swing.JFrame {
-
+    String[] att = null;
     /**
      * Creates new form UI_Area
      */
-    public UI_Area() {
+    public UI_Area(String[] att) {
+        this.att = att;
         initComponents();
     }
 
@@ -39,7 +40,6 @@ public class UI_Area extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 600));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(600, 600));
 
@@ -51,6 +51,11 @@ public class UI_Area extends javax.swing.JFrame {
         });
 
         button2.setLabel("Aumentar Velocidad");
+        button2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button2ActionPerformed(evt);
+            }
+        });
 
         button3.setLabel("Pausar/Reanudar");
 
@@ -112,8 +117,14 @@ public class UI_Area extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-        // TODO add your handling code here:
+        for(String a: att){
+            jTextArea1.append(a + "\n");
+        }
     }//GEN-LAST:event_button1ActionPerformed
+
+    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,7 +156,7 @@ public class UI_Area extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UI_Area().setVisible(true);
+                //new UI_Area().setVisible(true);
             }
         });
     }
