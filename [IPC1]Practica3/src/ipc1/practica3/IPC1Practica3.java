@@ -8,6 +8,7 @@ package ipc1.practica3;
 import UI_Layout.UI_Area;
 import java.util.Scanner;
 import java.io.*;
+
 /**
  *
  * @author 201612174
@@ -17,44 +18,25 @@ public class IPC1Practica3 {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // Nombre de documento
-        String fileName = "numeros.txt";
-        
-        //String para guardar informacion del documento
-        String[] att = null;
-        
-        //Guardando informacion del documento en un String Array
+        String fileName = "archivo_entrada.txt";
+        inicio(fileName);
+    }
+    
+    public static void inicio(String fileName) throws IOException {
+        String[] name = null;
         try {
-            FileReader inputFile = new FileReader(fileName);
-            try {
-                Scanner parser = new Scanner(inputFile);
-                while (parser.hasNextLine()) {
-                    //Delimitador ","
-                    String line = parser.nextLine();
-                    att = line.split(",");
-                }
-
-            } finally {
-                //Cerrar documento
-                inputFile.close();
-            }
-            //Errors
+            FileReader fr = new FileReader(fileName);
+            BufferedReader br = new BufferedReader(fr);
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                name = linea.split(",");
+                System.out.println(name[0] + " | " + name[1] + " | " + name[2]);            }
         } catch (FileNotFoundException exception) {
             System.out.println(fileName + " not found");
-        } catch (IOException exception) {
-            System.out.println("Unexpected I/O error occured.");
-        }
-        
-        UI_Area temp = new UI_Area(att);
-        temp.setVisible(true);
-        //Verificacion que el String esta initializado.
-        for (int i = 0; i < att.length; i++) {
-            System.out.println(att[i] + " ");
+
         }
 
-        
     }
 }
-
-
