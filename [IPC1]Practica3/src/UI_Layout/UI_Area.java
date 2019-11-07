@@ -5,7 +5,7 @@
  */
 package UI_Layout;
 
-import ipc1.practica3.CustomOutputStream;
+import ipc1.practica3.imprimir;
 import java.io.PrintStream;
 
 /**
@@ -117,9 +117,11 @@ public class UI_Area extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-        for(String a: att){
-            jTextArea1.append(a + "\n");
-        }
+        new imprimir("Lista", att, jTextArea1);
+        new imprimir("F", att, jTextArea1);
+        //for(String a: att){
+         //   jTextArea1.append(a + "\n");
+        //}
     }//GEN-LAST:event_button1ActionPerformed
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
