@@ -19,6 +19,7 @@ public class Timer implements Runnable {
     String name;
     JLabel tiempo;
     Thread t;
+    public static volatile boolean Suspendido = false;
 
     public Timer(String thread, JLabel tiempo, imprimir i1) {
         this.tiempo = tiempo;
@@ -35,6 +36,12 @@ public class Timer implements Runnable {
             tiempo.setText(i + "s");
             try {
                 Thread.sleep(1000);
+                if (Suspendido == true) {
+                     do {                         
+                        Thread.sleep(1); 
+                     } while (Suspendido == true);
+                  System.out.println("suspendido");  
+                }
             } catch (InterruptedException ex) {
                 Logger.getLogger(Timer.class.getName()).log(Level.SEVERE, null, ex);
             }

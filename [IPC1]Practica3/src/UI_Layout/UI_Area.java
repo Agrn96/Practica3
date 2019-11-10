@@ -6,6 +6,10 @@
 package UI_Layout;
 
 import ipc1.practica3.*;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -13,15 +17,17 @@ import ipc1.practica3.*;
  */
 public class UI_Area extends javax.swing.JFrame {
 
-    Lista_Circular lc;
-    Lista_Circular ld;
+    Lista_DoblementeEnlazada lc;
+    Lista_DoblementeEnlazada ld;
     imprimir imprimir1;
     imprimir imprimir2;
+    Timer T1;
+    public static String DireccionArchivo = "";
 
     /**
      * Creates new form UI_Area
      */
-    public UI_Area(Lista_Circular lc, Lista_Circular ld) {
+    public UI_Area(Lista_DoblementeEnlazada lc, Lista_DoblementeEnlazada ld) {
         this.lc = lc;
         this.ld = ld;
 
@@ -48,6 +54,7 @@ public class UI_Area extends javax.swing.JFrame {
         jTextArea2 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        button5 = new java.awt.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,14 +100,21 @@ public class UI_Area extends javax.swing.JFrame {
 
         jLabel2.setText("Insertar Datos a dos listas");
 
+        button5.setLabel("Explorar");
+        button5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -115,18 +129,23 @@ public class UI_Area extends javax.swing.JFrame {
                                 .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(116, 116, 116)
                         .addComponent(jLabel2)
-                        .addGap(126, 126, 126)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1)))
                 .addGap(0, 95, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -158,7 +177,7 @@ public class UI_Area extends javax.swing.JFrame {
         //Empieza los threads
         imprimir1 = new imprimir("Lista", lc, jTextArea1);
         imprimir2 = new imprimir("F", ld, jTextArea2);
-        new Timer("F", jLabel1, imprimir1);
+        T1 = new Timer("F", jLabel1, imprimir1);
 
     }//GEN-LAST:event_button1ActionPerformed
 
@@ -172,7 +191,31 @@ public class UI_Area extends javax.swing.JFrame {
 
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
         // TODO add your handling code here:
+        if (imprimir1.Suspendido == true) {
+            imprimir1.Suspendido = false;
+            imprimir2.Suspendido = false;
+            T1.Suspendido = false;
+        }else if (imprimir2.Suspendido == false) {
+            imprimir1.Suspendido = true;
+            imprimir2.Suspendido = true;
+            T1.Suspendido = true;
+        }
+        
+        
     }//GEN-LAST:event_button3ActionPerformed
+
+    private void button5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button5ActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.showOpenDialog(jPanel1);
+        DireccionArchivo = fileChooser.getSelectedFile().getAbsolutePath();
+        String fileName = UI_Area.DireccionArchivo;
+        try {
+            IPC1Practica3.inicio(fileName, lc, ld);
+        } catch (IOException ex) {
+            Logger.getLogger(UI_Area.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_button5ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -211,6 +254,7 @@ public class UI_Area extends javax.swing.JFrame {
     private java.awt.Button button2;
     private java.awt.Button button3;
     private java.awt.Button button4;
+    private java.awt.Button button5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
