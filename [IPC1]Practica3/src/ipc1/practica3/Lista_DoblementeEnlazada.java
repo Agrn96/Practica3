@@ -9,28 +9,27 @@ package ipc1.practica3;
  *
  * @author 201612174 <Alberto Gabriel Reyes Ning>
  */
-public class Lista_Circular {
+public class Lista_DoblementeEnlazada {
 
     public Node inicio = null;
 
-    Lista_Circular() {
+    Lista_DoblementeEnlazada() {
     }
 
     public void add(int carnet, String nombre, boolean prioridad) {
         Node newNode = new Node(carnet, nombre, prioridad);
         if (inicio == null) { //Agrega al inicio
             inicio = newNode;
-            newNode.next = inicio;
         } else if (inicio.next == inicio) { //Agregar despues del inicio
             inicio.next = newNode;
-            newNode.next = inicio;
+            newNode.anterior = inicio;
         } else { //Agregar al ultimo del circulo
             Node current = inicio;
-            while (current.next != inicio) {
+            while (current.next != null) {
                 current = current.next;
             }
             current.next = newNode;
-            newNode.next = inicio;
+            newNode.anterior = current;
         }
     }
 

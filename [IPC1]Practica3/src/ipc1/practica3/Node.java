@@ -14,6 +14,7 @@ public class Node { //Guardar informacion del usuario
     public String nombre;
     public boolean prioridad;
     public Node next = null;
+    public Node anterior = null;
 
     public Node(int carnet, String nombre, boolean prioridad) {
         this.carnet = carnet;

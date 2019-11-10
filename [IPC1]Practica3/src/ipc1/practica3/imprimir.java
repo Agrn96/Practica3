@@ -13,14 +13,15 @@ import javax.swing.JTextArea;
  */
 public class imprimir implements Runnable {
 
-    Lista_Circular lc;
+    Lista_DoblementeEnlazada lc;
     String name;
     Thread t;
     JTextArea jText;
     public static volatile boolean flag;
     public static volatile int time;
-
-    public imprimir(String thread, Lista_Circular lc, JTextArea jTextArea1) {
+    public static volatile boolean Suspendido = false;
+            
+    public imprimir(String thread, Lista_DoblementeEnlazada lc, JTextArea jTextArea1) {
         this.jText = jTextArea1;
         this.lc = lc;
         name = thread;
@@ -48,6 +49,13 @@ public class imprimir implements Runnable {
                 jText.append(current.carnet + "\n");
                 Thread.sleep(time);
                 current = current.next;
+                 if (Suspendido == true) {
+                     do {                         
+                        Thread.sleep(1); 
+                     } while (Suspendido == true);
+                  System.out.println("suspendido");  
+                } 
+               System.out.println("imprimiendo");
             } while (current != lc.inicio && !flag);
         } catch (InterruptedException e) {
             System.out.println(name + "Interrupted");

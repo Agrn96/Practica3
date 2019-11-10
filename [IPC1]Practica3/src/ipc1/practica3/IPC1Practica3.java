@@ -16,11 +16,9 @@ public class IPC1Practica3 {
 
     public static void main(String[] args) throws IOException {
         // Nombre de documento
-        String fileName = "archivo_entrada.txt";
-        Lista_Circular lc = new Lista_Circular();
+        Lista_DoblementeEnlazada lc = new Lista_DoblementeEnlazada();
         //Cambiar por lista doble enlazada
-        Lista_Circular ld = new Lista_Circular();
-        inicio(fileName, lc, ld);
+        Lista_DoblementeEnlazada ld = new Lista_DoblementeEnlazada();
 
         //Probando input en el terminal, quitar al finalizar tarea
         lc.display();
@@ -30,7 +28,7 @@ public class IPC1Practica3 {
         temp.setVisible(true);
     }
 
-    public static void inicio(String fileName, Lista_Circular lc, Lista_Circular ld) throws IOException {
+    public static void inicio(String fileName, Lista_DoblementeEnlazada lc, Lista_DoblementeEnlazada ld) throws IOException {
         String[] name = null;
         try {
             FileReader fr = new FileReader(fileName);
