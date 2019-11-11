@@ -8,6 +8,7 @@ package ipc1.practica3;
 /**
  *
  * @author 201612174 <Alberto Gabriel Reyes Ning>
+ * @author 201800951 <Pablo Gerardo Schaart Calderon>
  */
 public class Lista_Circular {
 

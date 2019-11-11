@@ -10,6 +10,7 @@ import javax.swing.JTextArea;
 /**
  *
  * @author 201612174 <Alberto Gabriel Reyes Ning>
+ * @author 201800951 <Pablo Gerardo Schaart Calderon>
  */
 public class imprimir implements Runnable {
 

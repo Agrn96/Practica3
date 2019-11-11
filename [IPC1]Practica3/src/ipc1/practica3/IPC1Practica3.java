@@ -11,6 +11,7 @@ import java.io.*;
 /**
  *
  * @author 201612174
+ * @author 201800951 <Pablo Gerardo Schaart Calderon>
  */
 public class IPC1Practica3 {
 

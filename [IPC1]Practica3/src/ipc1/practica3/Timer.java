@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 /**
  *
  * @author 201612174 <Alberto Gabriel Reyes Ning>
+ * @author 201800951 <Pablo Gerardo Schaart Calderon>
  */
 public class Timer implements Runnable {
 

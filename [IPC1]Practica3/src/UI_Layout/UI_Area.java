@@ -14,6 +14,7 @@ import javax.swing.JFileChooser;
 /**
  *
  * @author 201612174 <Alberto Gabriel Reyes Ning>
+ * @author 201800951 <Pablo Gerardo Schaart Calderon>
  */
 public class UI_Area extends javax.swing.JFrame {
 
